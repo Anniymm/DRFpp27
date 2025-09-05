@@ -14,12 +14,17 @@ class ProductSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'in_stock', 'user']
+        fields = ['id', 'name', 'price', 'in_stock', 'user', 'confirm_price']
         read_only_fields = ['id']
 
     def validate(self, data):
         if 'confirm_price' in data and data['price'] != data['confirm_price']:
             raise serializers.ValidationError('price and confirm price does not match')
         return data
+    
+    def create(self, validated_data):
+        validated_data.pop('confirm_price', None)
+        return super().create(validated_data)
+
 
 
