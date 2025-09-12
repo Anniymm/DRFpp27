@@ -2,11 +2,8 @@ from django.shortcuts import render
 from django.conf import settings
 from .serializers import (
     LogoutSerializer,
-    PasswordResetConfirmSerializer,
-    PasswordResetRequestSerializer,
     RegisterSerializer,
     LoginSerializer,
-    TokenResponseSerializer,
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -25,6 +22,7 @@ class RegisterView(APIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
+            # print
             serializer.save()
             return Response({"message": "User registered successfully."}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -39,7 +37,8 @@ class LoginView(APIView):
             return Response({
                 "access": serializer.validated_data['access'],
                 "refresh": serializer.validated_data['refresh']
-            })
+            }, status=status.HTTP_200_OK)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

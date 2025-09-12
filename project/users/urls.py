@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PasswordResetConfirmView, PasswordResetRequestView, RegisterView, LoginView, LogoutView #PasswordResetRequestView, PasswordResetConfirmView
+from .views import RegisterView, LoginView, LogoutView #PasswordResetRequestView, PasswordResetConfirmView
 from rest_framework_simplejwt.views import TokenRefreshView
 
 app_name = "userSystem" 
