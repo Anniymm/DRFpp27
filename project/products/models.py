@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from users.models import CustomUser
 # model -> serializer(json) - > view(serializers)
+
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=6, decimal_places=2)
